@@ -12,7 +12,7 @@ class ModerateChoice(TextChoices):
 
 class Review(models.Model):
     moderation = models.CharField(
-        max_length=200,
+        max_length=50,
         null=False,
         blank=False,
         choices=ModerateChoice.choices,
@@ -21,7 +21,7 @@ class Review(models.Model):
     )
 
     author = models.ForeignKey(
-        max_length=200,
+        max_length=50,
         null=False,
         blank=False,
         to=User,
@@ -30,7 +30,7 @@ class Review(models.Model):
         on_delete=models.CASCADE
     )
     product = models.ForeignKey(
-        max_length=200,
+        max_length=50,
         null=False,
         blank=False,
         to=Product,
@@ -38,8 +38,8 @@ class Review(models.Model):
         verbose_name='Товары',
         on_delete=models.CASCADE
     )
-    text = models.TextField(
-        max_length=2000,
+    text = models.CharField(
+        max_length=200,
         null=False,
         blank=False,
         verbose_name='Текст отзыва'

@@ -3,35 +3,35 @@ from django.db.models import TextChoices
 
 
 class CategoryChoice(TextChoices):
-    OTHER = 'Other', 'Разное'
-    TELEPHONE = 'Phone', 'Телефоны'
-    LAPTOP = 'Laptop', 'Ноутбуки'
+    OTHER = 'other', 'Разное'
+    TELEPHONE = 'smartphones', 'Смартфоны'
+    LAPTOP = 'laptops', 'Ноутбуки'
     TV = 'TV', 'Телевизоры'
 
 
 class Product(models.Model):
     name = models.CharField(
-        max_length=50,
+        max_length=200,
         null=False,
         blank=False,
         verbose_name="Наименование товара"
     )
     category = models.CharField(
-        max_length=50,
+        max_length=200,
         null=False,
         blank=False,
         choices=CategoryChoice.choices,
         default=CategoryChoice.OTHER,
         verbose_name="Категория товара"
     )
-    text = models.CharField(
-        max_length=200,
+    text = models.TextField(
+        max_length=2000,
         null=True,
         blank=True,
         verbose_name="Описание товара"
     )
     photo = models.CharField(
-        max_length=50,
+        max_length=200,
         null=False,
         blank=False,
         verbose_name='Изображение продукта',

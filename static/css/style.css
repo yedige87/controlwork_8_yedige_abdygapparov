@@ -77,3 +77,38 @@ body{
     text-align: center;
     border: solid 1px gray;
 }
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.product-item {
+    padding: 20px;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    margin-top: 40px;
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+}
+.full-width {
+    padding: 20px;
+    border-radius: 3px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.product-img  {
+    width: 30%;
+}
+.product-desc {
+    width: 65%;
+}
+.product-title {
+    font-size: 1.3em;
+}
+.product-price {
+    font-weight: bold;
+}
