@@ -1,25 +1,32 @@
 {% extends 'base.html' %}
-{% load django_bootstrap5 %}
-{% block title %}Home{% endblock %}
-{% block content %}
-    {% include 'partial/search.html' %}
-    <h1>Hello world</h1>
+{% load l10n %}
+{% block title %}Products{% endblock %}
+{% block menu %}
 
-    {% for article in articles %}
-        <h2>{{ article.title }}</h2>
-        <h2>{{ article.text }}</h2>
-        <p>
-            <a href="{% url 'article_detail' article.pk %}">Подробнее...</a>
-        </p>
-        <p>Favorite count {{ article.users.count }}</p>
-        {% if user.is_authenticated %}
-            <form action="{% url 'to_favorite' article.pk %}" method="post">
-                {% csrf_token %}
-                {% bootstrap_form favorite_form %}
-                {% bootstrap_button button_type="submit" content='Добавить в избранное' %}
-            </form>
+{% endblock %}
+{% block content %}
+{% include 'partial/search.html' %}
+<div class="content">
+    <div class="product-list">
+        {% if products %}
+        {% for p in products %}
+        <div class="product-item">
+            <div class="product-desc">
+                <p class="product-title">{{ p.name }}</p>
+                {% for choice in choices %}
+                    {% if choice.0 == p.category %}
+                        <p class="product-category">{{ choice.1 }}</p>
+                    {% endif %}
+                {% endfor %}
+                <p><a href="{% url 'product_detail' p.id %}">see more >>></a></p>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>Products is empty!</p>
         {% endif %}
-    {% endfor %}
+    </div>
+</div>
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}

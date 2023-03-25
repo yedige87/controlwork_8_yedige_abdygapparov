@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import MinLengthValidator, BaseValidator
 
+from webapp.models import Product
 
 
 def max_len_validator(string):
@@ -23,7 +24,16 @@ class CustomLenValidator(BaseValidator):
     def clean(self, value):
         return len(value)
 
-
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'text', 'photo', 'category']
+        labels = {
+            'name': 'Наименование',
+            'text': 'Описание',
+            'photo': 'Изображение',
+            'category': 'Категория'
+        }
 
 class SearchForm(forms.Form):
     search = forms.CharField(max_length=20, required=False, label='Найти')

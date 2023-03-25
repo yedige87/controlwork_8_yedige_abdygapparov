@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Product{% endblock %}
+{% block menu %}
+{% if user.is_authenticated %}
+    {% if perms.webapp.change_product %}
+    <a href="{% url 'product_update' product.pk%}" class="btn btn-success">Update product</a>
+    {% endif %}
+    {% if perms.webapp.delete_product %}
+    <a href="{% url 'product_delete' product.pk%}" class="btn btn-danger">Delete product</a>
+    {% endif %}
+    {% if perms.webapp.create_product %}
+    <a href="{% url 'product_add' %}" class="btn btn-primary">Product Create</a>
+    {% endif %}
+{% endif %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Product</h1>
+    <p>Title: {{ product.name }}</p>
+        {% for choice in choices %}
+        {% if choice.0 == product.category %}
+        <p class="product-category">Category: {{ choice.1 }}</p>
+        {% endif %}
+        {% endfor %}
+        <p>Text: {{ product.text }}</p>
+    <p>Photo: {{ product.photo }}</p>
+
+    {% if product.reviews %}
+    {% for  review in product.reviews.all %}
+        <p>Пользователь <b>{{ review.user.username }}</b> - Коментарий: {{ review.text }}  - Оценка: {{ review.grade_stars }}</p>
+    {% endfor %}
+        {% else %}
+        <h2>Нет комментариев и оценок!</h2>
+        {% endif %}
+    </div>
+{% endblock %}

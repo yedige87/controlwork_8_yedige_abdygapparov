@@ -11,27 +11,27 @@ class CategoryChoice(TextChoices):
 
 class Product(models.Model):
     name = models.CharField(
-        max_length=200,
+        max_length=50,
         null=False,
         blank=False,
         verbose_name="Наименование товара"
     )
     category = models.CharField(
-        max_length=200,
+        max_length=50,
         null=False,
         blank=False,
         choices=CategoryChoice.choices,
         default=CategoryChoice.OTHER,
         verbose_name="Категория товара"
     )
-    text = models.TextField(
-        max_length=1000,
+    text = models.CharField(
+        max_length=200,
         null=True,
         blank=True,
         verbose_name="Описание товара"
     )
     photo = models.CharField(
-        max_length=200,
+        max_length=50,
         null=False,
         blank=False,
         verbose_name='Изображение продукта',
