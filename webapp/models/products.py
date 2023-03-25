@@ -24,7 +24,7 @@ class Product(models.Model):
         default=CategoryChoice.OTHER,
         verbose_name="Категория товара"
     )
-    text = models.CharField(
+    text = models.TextField(
         max_length=1000,
         null=True,
         blank=True,
